@@ -1,5 +1,22 @@
-{% extends 'base.html' %}
-{% block header %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Marker Labels</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPJKsp0KIXVQNZTO8DY1xT6G3fcCvG3Jg"></script>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPJKsp0KIXVQNZTO8DY1xT6G3fcCvG3Jg&libraries=visualization">
@@ -68,10 +85,8 @@
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
-{% endblock header %}
-{% block title %}
-    Homepage - {{ block.super }}
-{% endblock title %}
-{% block content %}
-<div id="map"></div>
-{% endblock content %}
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+</html>
