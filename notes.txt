@@ -1,0 +1,3 @@
+info windows: https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple
+draggable directions: https://developers.google.com/maps/documentation/javascript/examples/directions-draggable
+heatmap: https://developers.google.com/maps/documentation/javascript/heatmaplayer

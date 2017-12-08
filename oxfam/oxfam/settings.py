@@ -84,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'floody',
         'USER': 'root',
-        'PASSWORD': 'nguyentailong',
+        'PASSWORD': '123456',
     }
 }
 
@@ -126,9 +126,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT = "/home/tailongnguyen/oxfamhackathon/oxfam/media/"
+MEDIA_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/media/"
 MEDIA_URL = "/media/"
-STATIC_ROOT = '/home/tailongnguyen/oxfamhackathon/oxfam/floody/static/'
+STATIC_ROOT =  os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/static/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'testing@example.com'
