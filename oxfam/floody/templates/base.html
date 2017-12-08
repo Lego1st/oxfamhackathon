@@ -1,0 +1,166 @@
+{% load staticfiles %} 
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" href="{% static 'css/font-awesome-4.7.0/css/font-awesome.min.css' %}" /> -->
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Playfair+Display|Playfair+Display+SC" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>
+        {% block title %} Floody Alert {% endblock title %}
+    </title>
+    {% block header %}{% endblock header %}
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <div class="hero-image">
+        <div class="hero-text">
+            <h1 style="font-size:100px">Floody Alert</h1>
+            <h2>Travel more safely</h2>
+        </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-info btn-lg float" data-toggle="modal" data-target="#myModal">
+    <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+    </button>
+    <div class="container" id="container">
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+        
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Accounts</h4>
+                    </div>
+                    <div class="modal-body">
+                         {% if user.is_authenticated %}
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Logout</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="#">Register</a>
+                            </li>
+                            <li>
+                                <a href="#">Login</a>
+                            </li>
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+
+        {% block content %} {% endblock content %}
+    </div>
+
+    <footer>
+        <div class="footer" id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6"></div>
+                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                        <h3> Contact us </h3>
+                        <ul>
+                            <li>
+                                <a href="https://www.facebook.com/tiensinh.vu"> Vu Tien Sinh </a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/tafilong"> Nguyen Tai Long </a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/lego1st"> Nguyen Trung Nghia </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                        <h3> Location </h3>
+                        <ul>
+                            <li>
+                                <a href="#"> K60-CA </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                        <h3> University </h3>
+                        <ul>
+                            <li>
+                                <a href="#"> UET-VNU</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
+                        <h3> More Contact </h3>
+                        <ul class="social">
+                            <li>
+                                <a href="http://fb.com" target="_blank">
+                                    <i class=" fa fa-facebook"> </i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://twitter.com" target="_blank">
+                                    <i class="fa fa-twitter"> </i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://google.com" target="_blank">
+                                    <i class="fa fa-google-plus"> </i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://youtube.com" target="_blank">
+                                    <i class="fa fa-youtube"> </i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--/.row-->
+            </div>
+            <!--/.container-->
+        </div>
+        <!--/.footer-->
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p style="text-align: center;"> Copyright © SNL 2017. All right reserved. </p>
+            </div>
+        </div>
+        <!--/.footer-bottom-->
+    </footer>
+</body>
+<script>
+    $(window).scroll(function () {
+        if ($(window).scrollTop() >= 640) { $('.navbar').css('background', 'black'); }
+        else { $('.navbar').css('background', 'transparent'); }
+    });
+    $(document).ready(function () {
+        var el = document.getElementById('container');
+        console.log(el);
+        el.scrollIntoView(true);
+    });
+    $(document).on('change', '.file', function () {
+        $("#image").val($(this).val().replace(/C:\\fakepath\\/i, ''));
+    });
+
+</script>
+
+</html>
