@@ -9,3 +9,9 @@ from django.http import HttpResponse
 
 def index(request):
     return render(request, 'index.html')
+
+def postimage(request):
+    im = request.POST.image
+    pos = request.POST.location
+    print(pos)
+    return render(request, 'index.html')
