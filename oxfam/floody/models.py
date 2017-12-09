@@ -13,20 +13,11 @@ import datetime
 
 class Post(models.Model):
     image = models.ImageField(upload_to='gallery/')
-    onwer = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     timeCreate = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return self.pet.petName
-
-class UserProfile(models.Model):
-    user = AutoOneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=15, default="")
-    # follows = models.ManyToManyField(, related_name='followers', symmetrical=False, blank=True)
-
-    def __str__(self):
-        return self.user.username
-
+        return self.owner.username
 
 
 class Comment(models.Model):
@@ -38,12 +29,3 @@ class Comment(models.Model):
     def __str__(self):
         return self.text
 
-
-def create_userprofile(sender, instance, created, **kwargs):
-    """Create userprofile for every new user."""
-    if created:
-        instance.userprofile.save()
-
-
-signals.post_save.connect(create_userprofile, sender=User, weak=False,
-                          dispatch_uid='create_userprofile')

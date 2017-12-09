@@ -1,0 +1,74 @@
+
+{% extends 'base.html' %}
+{% block title %}
+    Registration Form - {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1 style="text-align: center;">Please logout to register</h1>
+    {%else%}
+    <div class="container">
+        <div class="row main">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    <h1 class="title">Registration</h1>
+                    <hr />
+                </div>
+            </div>
+            <div class="main-login main-center content">
+                <form class="form-horizontal" role="form" method="POST" action="{% url 'register complete' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name" class="cols-sm-2 control-label">Username</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-user fa" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" class="form-control" name="username" id="name" placeholder="Enter your username" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="cols-sm-2 control-label">Phone</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" class="form-control" name="first_name" id="email" placeholder="Enter your phone number" />
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="password" class="cols-sm-2 control-label">Password</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                                </span>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {% if error != None %}
+                            {% for e in error %}
+                                <p style="color:red;">{{e}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-group ">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                    </div>
+                    <div class="login-register">
+                        <a href="{% url 'auth_login' %}">Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {%endif%}
+{% endblock content %}

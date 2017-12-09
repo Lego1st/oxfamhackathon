@@ -20,10 +20,7 @@ from django.conf import settings
 from floody import views
 
 urlpatterns = [
-    url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^floody/', include('floody.urls')),
     url(r'^admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# url(r'^accounts/register/complete/$',
-#     views.register_complete, name='register complete'),

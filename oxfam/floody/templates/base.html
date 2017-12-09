@@ -8,9 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- <link rel="stylesheet" href="{% static 'css/font-awesome-4.7.0/css/font-awesome.min.css' %}" /> -->
-    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet"> -->
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type='text/css'>
+    <!-- <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.css' %}" /> -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type='text/css'> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lobster|Playfair+Display|Playfair+Display+SC" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
@@ -26,7 +27,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<body>
     <div class="hero-image">
         <div class="hero-text">
             <h1 style="font-size: 30px">Floody Alert</h1>
@@ -43,6 +44,15 @@
         </span>
     </label>
         
+    {% if user.is_authenticated %}
+     <a href="{% url 'floody:logged out' %}" type="button" class="btn btn-info btn-lg float-log-out">
+         <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
+    </a>
+    {% else %}
+        <button type="button" class="btn btn-info btn-lg float-acc" data-toggle="modal" data-target="#myModal">
+        <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+        </button>
+    {% endif %}
     <div class="container" id="container">
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -54,23 +64,138 @@
                         <h4 class="modal-title">Accounts</h4>
                     </div>
                     <div class="modal-body">
-                         {% if user.is_authenticated %}
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-bell-o" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">Logout</a>
-                            </li>
-                        {% else %}
-                            <li>
-                                <a href="#">Register</a>
-                            </li>
-                            <li>
-                                <a href="#">Login</a>
-                            </li>
-                        {% endif %}
+                            <div class="row">
+                                <div class="col-xs-3" style="text-align:center;"></div>
+                                <div class="col-xs-2" style="text-align:center;">
+                                    <a class="btn btn-primary loggin-btn">Log in </a> 
+                                </div>
+                                <div class="col-xs-2" style="text-align:center;">
+                                    <h3 style="margin-top: -0px;">or</h3>
+                                </div>
+                                <div class="col-xs-2" style="text-align:center;">
+                                    <a class="btn btn-success sign-up-btn">Sign up</a>
+                                </div>
+                                <div class="col-xs-3" style="text-align:center;"></div>
+                            </div>
+                            <div class="row sign-up">
+                                <div class="col-xs-3"></div>
+                                <div class="col-xs-6">
+                                    <div class="main-sign-up">
+                                        <div class="panel-heading">
+                                            <div class="panel-title text-center">
+                                                <h1 class="title">Registration</h1>
+                                                <hr />
+                                            </div>
+                                        </div>
+                                        <div class="main-login main-center content">
+                                            <form class="form-horizontal" role="form" method="POST" action="{% url 'floody:register complete' %}">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label for="name" class="cols-sm-2 control-label">Username</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-user fa" aria-hidden="true"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control" name="username" id="name" placeholder="Enter your username" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email" class="cols-sm-2 control-label">Phone</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control" name="first_name" id="email" placeholder="Enter your phone number" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                
+                                                <div class="form-group">
+                                                    <label for="password" class="cols-sm-2 control-label">Password</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                                                            </span>
+                                                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    {% if error != None %} {% for e in error %}
+                                                    <p style="color:red;">{{e}}</p>
+                                                    {% endfor %} {% endif %}
+                                                </div>
+                                                <div class="form-group ">
+                                                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row loggin">
+                                <div class="col-xs-3"></div>
+                                <div class="col-xs-6">
+                                    <div class="main-loggin">
+                                        <div class="panel-heading">
+                                            <div class="panel-title text-center">
+                                                <h1 class="title">Login</h1>
+                                                <hr />
+                                            </div>
+                                        </div>
+                                        <div class="main-login main-center content">
+                                            <form class="form-horizontal" role="form" method="POST" action="{% url 'floody:logged in' %}">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label for="name" class="cols-sm-2 control-label">Username</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-user fa" aria-hidden="true"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control" name="username" id="name" placeholder="Enter your username" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                
+                                                <div class="form-group">
+                                                    <label for="password" class="cols-sm-2 control-label">Password</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                                                            </span>
+                                                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    {% if error != None %} {% for e in error %}
+                                                    <p style="color:red;">{{e}}</p>
+                                                    {% endfor %} {% endif %}
+                                                </div>
+                                                <div class="form-group">
+                                                    {% if messages %}
+                                                    <ul class="messages">
+                                                        {% for message in messages %}
+                                                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                                                            {% endfor %}
+                                                    </ul>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="form-group ">
+                                                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Login</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -145,6 +270,30 @@
     $(document).ready(function () {
         var el = document.getElementById('container');
         el.scrollIntoView(true);
+    });
+    $(document).ready(function () {
+        var elMessages = $('.messages');
+        if (elMessages.length && content) {
+            $('.loggin').css('display', 'block');
+            $('.sign-up').css('display', 'none');
+            $('.float-acc').click();
+        }
+        else{
+            $('.loggin').css('display', 'none');
+            $('.sign-up').css('display', 'none');
+        }
+    })
+    $('a.loggin-btn').click(function () {
+        $('.loggin').css('display', 'block');
+        $('.sign-up').css('display', 'none');
+    })
+    $('a.sign-up-btn').click(function () {
+        $('.loggin').css('display', 'none');
+        $('.sign-up').css('display', 'block');
+    })
+
+    $(document).on('change', '.file', function () {
+        $("#image").val($(this).val().replace(/C:\\fakepath\\/i, ''));
     });
 
 
