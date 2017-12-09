@@ -13,11 +13,17 @@ from .models import *
 def index(request):
     return render(request, 'index.html')
 
-def postimage(request):
-    im = request.POST.image
-    pos = request.POST.location
-    print(pos)
-    return render(request, 'index.html')
+def post(request):
+    form = PostForm(request.POST or None, request.FILES)
+    if request.method == 'POST':
+        if form.is_valid():
+            new_post = Post.objects.create(
+                image=form.cleaned_data['image'], location=form.cleaned_data['location'])
+            new_post.save()
+            # print form.cleaned_data['image']
+            # print form.cleaned_data['location']
+    return HttpResponseRedirect(reverse('floody:index'))
+
 def loggin_view(request):
     username = request.POST['username']
     password = request.POST['password']

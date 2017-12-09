@@ -1,6 +1,6 @@
 
 body {
-    background-color: #EDEFF1;
+    background-color: #f8f8f8;
     position: relative; 
 }
 
@@ -57,6 +57,19 @@ body, html{
 	width:60px;
 	height:60px;
 	bottom:92px;
+	right:20px;
+	background-color:#0C9;
+	opacity: 0.7;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+.float-here{
+	position:fixed;
+	z-index:9999;
+	width:60px;
+	height:60px;
+	bottom:174px;
 	right:20px;
 	background-color:#0C9;
 	opacity: 0.7;
@@ -191,7 +204,7 @@ body, html{
 }
 
 
-.map {
+#map {
 	height: 95%;
 	width: 95%;
 	text-align: center;

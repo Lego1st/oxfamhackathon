@@ -9,6 +9,10 @@ class EditProfileForm(forms.Form):
     last_name = forms.CharField(label='Last Name', max_length=30)
     email = forms.CharField(label='Phone', max_length=15)
 
+class PostForm(forms.ModelForm):
+    class Meta(object):
+        model = Post
+        fields = ('image','location',)
 
 class RegisterForm(forms.ModelForm):
     class Meta(object):

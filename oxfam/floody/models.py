@@ -12,12 +12,13 @@ import datetime
 # Create your models here.
 
 class Post(models.Model):
-    image = models.ImageField(upload_to='gallery/')
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='uploaded/')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    location = models.CharField(default = '', max_length = 100)
     timeCreate = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return self.owner.username
+        return self.image
 
 
 class Comment(models.Model):
