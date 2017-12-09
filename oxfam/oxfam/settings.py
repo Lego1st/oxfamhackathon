@@ -25,7 +25,7 @@ SECRET_KEY = 'vv7oej_-5=1yzimz3(1agvl5_m(14m=9q=aw29*5h!=h53phu9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'floody',
-    'registration',
     'annoying',
     'rest_framework',
     'notify',
@@ -84,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'floody',
         'USER': 'root',
-        'PASSWORD': '123456',
+        'PASSWORD': 'nguyentailong',
     }
 }
 
@@ -128,7 +127,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/media/"
 MEDIA_URL = "/media/"
-STATIC_ROOT =  os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/static/'
+STATIC_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/static/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'testing@example.com'
