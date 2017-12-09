@@ -7,6 +7,7 @@ from .forms import *
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.contrib import messages
 from django.contrib.auth.password_validation import validate_password, password_validators_help_texts, get_default_password_validators, ValidationError
 from .models import *
@@ -27,6 +28,7 @@ def post(request):
         if form.is_valid():
             new_post = Post.objects.create(
                 image=form.cleaned_data['image'], location=form.cleaned_data['location'])
+            print (type(form.cleaned_data['image']))
             new_post.save()
             # print form.cleaned_data['image']
             # print form.cleaned_data['location']
@@ -36,17 +38,20 @@ def post(request):
 def camimage(request):
     if request.method == 'POST':
         image = request.data.get("image")
-        location =  request.data.get('location').split()
-        print(location)
+        location =  request.data.get('location')
+        name = request.data.get("name")
         image = Image.open(BytesIO(base64.b64decode(image)))
         data = np.array(image,dtype=np.float32)
         url = "http://localhost:5050/classify"
-        print("post file")
+        # print("post file")
         r = requests.post(url,data=pickle.dumps(data[:,:,:3]))
         a = r.content.decode("utf-8")
+        buffer = BytesIO()
+        image.save(buffer, format = 'JPEG')
+        im = InMemoryUploadedFile(buffer, None, name, '/home/tailongnguyen/oxfamhackathon/oxfam/media/uploaded/', buffer.tell(), None)
         if a == "Flood":
-            loc_x = float(location[0])
-            loc_y = float(location[1])
+            new_post = Post.objects.create(image=im, location=location)
+            new_post.save()
         return render(request, 'index.html')
 
 def loggin_view(request):

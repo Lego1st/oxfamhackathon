@@ -18,7 +18,7 @@ class Post(models.Model):
     timeCreate = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return self.image
+        return self.location
 
 
 class Comment(models.Model):
