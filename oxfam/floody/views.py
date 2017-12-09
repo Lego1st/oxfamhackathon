@@ -2,13 +2,13 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from forms import *
+from .forms import *
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.password_validation import validate_password, password_validators_help_texts, get_default_password_validators, ValidationError
-from models import *
+from .models import *
 
 def index(request):
     return render(request, 'index.html')

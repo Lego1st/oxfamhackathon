@@ -35,14 +35,11 @@
         </div>
         </div>
     </div>
-    <button type="button" class="btn btn-info btn-lg float" data-toggle="modal" data-target="#myModal">
-    <i class="fa fa-user fa-2x" aria-hidden="true"></i>
-    </button>
-    <label>
-        <span class="btn btn-info btn-lg float icon-span-filestyle glyphicon glyphicon-folder-open">
+    <a href="#" type="button" class="btn btn-info btn-lg float-upload">
+        <i class="fa fa-upload fa-2x" style="margin-left: -3px;">
             <input type="file" style="display: none;" class="file" id="file" required>
-        </span>
-    </label>
+        </i>
+    </a>
         
     {% if user.is_authenticated %}
      <a href="{% url 'floody:logged out' %}" type="button" class="btn btn-info btn-lg float-log-out">

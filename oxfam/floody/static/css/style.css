@@ -53,6 +53,7 @@ body, html{
 }
 .float-acc{
 	position:fixed;
+	z-index:9999;
 	width:60px;
 	height:60px;
 	bottom:40px;
@@ -63,8 +64,22 @@ body, html{
 	text-align:center;
 	box-shadow: 2px 2px 3px #999;
 }
+.float-upload{
+	position:fixed;
+	z-index:9999;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:120px;
+	background-color:rgb(27, 154, 212);
+	opacity: 0.7;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
 .float-log-out{
 	position:fixed;
+	z-index:9999;
 	width:60px;
 	height:60px;
 	bottom:40px;
